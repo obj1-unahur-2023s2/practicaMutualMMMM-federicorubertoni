@@ -1,0 +1,68 @@
+import socios.*
+import viajes.*
+
+describe "test de viajes de playa"{
+	const playa = new Playa(idiomas = #{"espaniol"}, largoDePlaya=1500)
+	
+	test "Este viaje requiere esfuerzo"{
+		assert.that(playa.implicaEsfuerzo())
+	}
+	
+	test "la cantidad de días deben ser 3"{
+		assert.equals(3, playa.dias())
+	}
+	
+	test "el viaje sirve para broncearse"{
+		assert.that(playa.sirveBronceado())
+	}
+	
+	test "el viaje no es interesante"{
+		assert.notThat(playa.esInteresante())
+	}
+	
+	
+}
+
+describe "test de viaje de ciudad"{
+	const ciudad = new Ciudad(atracciones=5)
+	
+		test "Este viaje requiere esfuerzo"{
+		assert.that(ciudad.implicaEsfuerzo())
+	}
+	
+		test "la cantidad de días deben ser 2.5"{
+		assert.equals(2.5, ciudad.dias())
+	}
+	
+		test "el viaje no sirve para broncearse"{
+		assert.notThat(ciudad.sirveBronceado())
+	}
+	
+		test "el viaje es interesante"{
+		assert.that(ciudad.esInteresante())
+	}
+	
+}
+
+describe "test de socios"{
+	const playa = new Playa(idiomas = #{"espaniol"}, largoDePlaya=1500)
+	const ciudadtropical = new CiudadTroplical(atracciones=6)
+	const socio1 = new Tranquilo(actividades=[playa,ciudadtropical],actividadesMax=5, edad=35, idiomas="Espaniol")
+	
+	test "no le atrae el viaje a la playa"{
+		assert.notThat(socio1.leAtrae(playa))
+	}
+	
+	test "le atrae el viaje a ciudad tropical"{
+		assert.that(socio1.leAtrae(ciudadtropical))
+	}
+	test "es adorador del sol"{
+		assert.that(socio1.esAdoradorSol())
+	}
+	test "ambos viajes implican esfuerzo"{
+		assert.equals([playa, ciudadtropical], socio1.actividadesEsforzadas())
+	}
+		
+	
+	
+}
